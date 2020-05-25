@@ -21,31 +21,35 @@ public class Verbindung {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
     }
 
-    public void sendeNachricht(String nachricht) {
+    public void nachrichtSenden(String nachricht) {
         if (!clientSocket.isClosed()) {
-            aus.println(nachricht);
+            aus.println(nachricht + "\n");
         }
     }
 
-    public Optional<String> leseNachricht() {
-        try {
-            // Wir versuchen auf jeden Fall, Exceptions zu vermeiden.
-            // Java Exceptions verbrauchen in vielen JREs viele Systemressourcen.
-            if (!clientSocket.isClosed()) {
-                return Optional.ofNullable(in.readLine());
-            } else {
-                return Optional.empty();
+    public String nachrichtLesen() throws IOException {
+        Optional<String> nachricht = Optional.empty();
+        while (nachricht.isEmpty() && !clientSocket.isClosed()) {
+            try {
+                nachricht = Optional.ofNullable(in.readLine());
+                if(nachricht.isEmpty()) {
+                    // Damit benutzt dieser busy-wait Lösung nicht so viel CPU Zyklen
+                    Thread.sleep(5);
+                }
+            } catch (InterruptedException e) {
             }
-        } catch (IOException e) {
-            return Optional.empty();
         }
+        if (nachricht.isEmpty()) {
+            throw new IOException();
+        }
+        return nachricht.get();
     }
 
     public boolean istOffen() {
         return istOffen;
     }
 
-    public void schliesse() throws IOException {
+    public void schliessen() throws IOException {
         istOffen = false;
         in.close();
         aus.close();
