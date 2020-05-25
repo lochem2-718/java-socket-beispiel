@@ -1,3 +1,5 @@
+package main;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -28,7 +30,7 @@ public class Client {
                     "Fehlern gibt's halt net!\n" +
                     "DIESES PROGRAMM IST DOCH PERFEKT!!!!\n" +
                     "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!!\n" +
-                    "Ich konnte nicht mit dem Server verbinden\uD83D\uDE22.\n" +
+                    "Ich konnte nicht mit dem main.Server verbinden\uD83D\uDE22.\n" +
                     "%s\n", ioErr.getMessage());
             try {
                 Thread.sleep(1000);

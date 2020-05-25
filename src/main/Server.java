@@ -1,3 +1,5 @@
+package main;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.LinkedList;
@@ -22,7 +24,7 @@ public class Server {
                         "Fehlern gibt's halt net!\n" +
                         "DIESES PROGRAMM IST DOCH PERFEKT!!!!\n" +
                         "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!!\n" +
-                        "Ich konnte keine neue Client Verbindung hinzufügen\uD83D\uDE22.\n" +
+                        "Ich konnte keine neue main.Client main.Verbindung hinzufügen\uD83D\uDE22.\n" +
                         "%s\n", e.getMessage());
             }
         }
