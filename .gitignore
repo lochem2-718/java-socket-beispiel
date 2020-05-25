@@ -1,3 +1,8 @@
+# Intellij Datein
+out/
+.idea/
+JavaSocketBeispiel.iml
+
 # Compiled class file
 *.class
 
