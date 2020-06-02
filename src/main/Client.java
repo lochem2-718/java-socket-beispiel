@@ -11,27 +11,17 @@ import java.util.regex.Pattern;
 public class Client {
     private Verbindung serverVerbindung;
 
-    public Client(InetAddress addresse) {
+    public Client(String ipAddresse, int port) {
         Random r = new Random();
         boolean offenePortGefunden = false;
-        Socket socket = new Socket();
-        while (!offenePortGefunden) {
-            offenePortGefunden = true;
-            try {
-                int port = r.nextInt(65_535 - 5000) + 5000;
-                socket.bind(new InetSocketAddress(addresse, port));
-            } catch (IOException e) {
-                offenePortGefunden = false;
-            }
-        }
         try {
-            serverVerbindung = new Verbindung(socket);
+            serverVerbindung = new Verbindung(new Socket(ipAddresse, port));
         } catch (IOException ioErr) {
             System.err.printf("Die Regierung lügt dir.\n" +
                     "Fehlern gibt's halt net!\n" +
                     "DIESES PROGRAMM IST DOCH PERFEKT!!!!\n" +
                     "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!!\n" +
-                    "Ich konnte nicht mit dem main.Server verbinden\uD83D\uDE22.\n" +
+                    "Ich konnte nicht mit dem Server verbinden\uD83D\uDE22.\n" +
                     "%s\n", ioErr.getMessage());
             try {
                 Thread.sleep(1000);
